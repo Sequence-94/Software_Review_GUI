@@ -20,6 +20,7 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 add_executable(Software_Review_GUI
   main.cpp
+  softwaregui.h softwaregui.cpp
 )
 target_link_libraries(Software_Review_GUI Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(Software_Review_GUI Qt${QT_VERSION_MAJOR}::Widgets)
