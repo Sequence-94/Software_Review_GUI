@@ -9,7 +9,7 @@ void ListWriter::write(SoftwareList sl) const
     QString alldata;
     foreach(Software s,list){
         alldata.append(QString(s.getName() + "#" +
-                               s.getDate().toString("dd-MM-yyyy") + "#" +
+                               s.getDate().toString("yyyy/MM/dd") + "#" +
                                QVariant(s.getRecommend()).toString()) + "\n");
     }
     FileWriter f("sequencefile.txt");

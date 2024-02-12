@@ -32,8 +32,9 @@ int main(int argc, char *argv[])
     QTextStream cout(stdout);
     QList<Software> sl = list2.getSoftList();
     foreach(Software s,sl){
-        cout<<s.getName()<<": "<<s.getDate().toString("dd-MM-yyyy")<<": "<<QVariant(s.getRecommend()).toString()<<"\n";
+        cout<<s.getName()<<": "<<s.getDate().toString("yyyy/MM/dd")<<": "<<QVariant(s.getRecommend()).toString()<<"\n";
     }
+
     SoftwareGui software;
     software.show();
 

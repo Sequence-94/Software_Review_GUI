@@ -14,7 +14,7 @@ SoftwareList ListReader::read() const
     for(int i=0;i<data.size()-1;i++){
         QStringList line = data.at(i).split("#");
         Software s(line.at(0),
-                   QDate::fromString(line.at(1),"dd-MM-yyyy"),
+                   QDate::fromString(line.at(1),"yyyy/MM/dd"),
                    QVariant(line.at(2)).toBool()
                    );
         list.add(s);

@@ -11,7 +11,7 @@ void FileWriter::write(QString s) const
 {
 
     QFile file(fileName);
-    if(file.open(QIODevice::WriteOnly)){
+    if(file.open(QIODevice::Append)){
         QTextStream cout(&file);
         cout<<s;
         file.close();

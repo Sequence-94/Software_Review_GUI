@@ -5,6 +5,9 @@
 #include<QPushButton>
 #include<QLabel>
 #include<QGridLayout>
+#include"listwriter.h"
+#include"software.h"
+#include"listreader.h"
 
 
 
@@ -29,12 +32,26 @@ SoftwareGui::SoftwareGui(QWidget *parent)
 
 void SoftwareGui::addSoftware()
 {
+    Software s(nameInput->text(),dateInput->date(),recoInput->isChecked());
+    SoftwareList sl;
+    sl.add(s);
+    ListWriter lw;
+    lw.write(sl);
+
 
 }
 
 void SoftwareGui::displaySoftware()
 {
+    SoftwareList list;
+    ListReader lr;
+    list = lr.read();
 
+    QTextStream cout(stdout);
+    QList<Software> sl = list.getSoftList();
+    foreach(Software s,sl){
+        cout<<s.getName()<<": "<<s.getDate().toString("yyyy/MM/dd")<<": "<<QVariant(s.getRecommend()).toString()<<"\n";
+    }
 }
 
 void SoftwareGui::softwareReviewGui()
