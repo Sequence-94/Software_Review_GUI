@@ -21,6 +21,12 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 add_executable(Software_Review_GUI
   main.cpp
   softwaregui.h softwaregui.cpp
+  software.h software.cpp
+  softwarelist.h softwarelist.cpp
+  filewriter.h filewriter.cpp
+  listwriter.h listwriter.cpp
+  filereader.h filereader.cpp
+  listreader.h listreader.cpp
 )
 target_link_libraries(Software_Review_GUI Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(Software_Review_GUI Qt${QT_VERSION_MAJOR}::Widgets)
