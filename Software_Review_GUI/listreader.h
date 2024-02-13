@@ -5,7 +5,7 @@ class ListReader
 {
 public:
     ListReader();
-    SoftwareList read() const;
+    SoftwareList* read() const;
 };
 
 #endif // LISTREADER_H

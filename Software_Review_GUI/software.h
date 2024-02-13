@@ -2,9 +2,15 @@
 #define SOFTWARE_H
 #include<QString>
 #include<QDate>
+#include<QObject>
 
-class Software
+class Software :public QObject
 {
+    Q_OBJECT
+    Q_PROPERTY(QString name READ getName WRITE setName)
+    Q_PROPERTY(QDate date READ getDate WRITE setDate)
+    Q_PROPERTY(bool recommend READ getRecommend  WRITE setRecommend)
+
 public:
     Software();
     Software(QString n,QDate d,bool r);

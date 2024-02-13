@@ -6,6 +6,9 @@
 #include<QLabel>
 #include<QGridLayout>
 #include<QMessageBox>
+#include<QObject>
+#include<QMetaProperty>
+#include<QMetaObject>
 #include"listwriter.h"
 #include"software.h"
 #include"listreader.h"
@@ -46,9 +49,9 @@ SoftwareGui::SoftwareGui(QWidget *parent)
 
 void SoftwareGui::addSoftware()
 {
-    Software s(nameInput->text(),dateInput->date(),recoInput->isChecked());
-    SoftwareList sl;
-    sl.add(s);
+    Software* s(new Software(nameInput->text(),dateInput->date(),recoInput->isChecked()));
+    SoftwareList* sl(new SoftwareList());
+    sl->add(s);
     ListWriter lw;
     lw.write(sl);
 
@@ -69,14 +72,45 @@ void SoftwareGui::addSoftware()
 
 void SoftwareGui::displaySoftware()
 {
-    SoftwareList list;
+    SoftwareList* list(new SoftwareList());
     ListReader lr;
     list = lr.read();
 
     QTextStream cout(stdout);
-    QList<Software> sl = list.getSoftList();
-    foreach(Software s,sl){
-        cout<<s.getName()<<": "<<s.getDate().toString("yyyy/MM/dd")<<": "<<QVariant(s.getRecommend()).toString()<<"\n";
+    QList<Software*>* sl = list->getSoftList();
+    // foreach(QObject* s,*sl){
+    //     cout<<
+    //         s->getName()<<": "<<
+    //         s->getDate().toString("yyyy/MM/dd")<<": "<<
+    //         QVariant(s->getRecommend()).toString()
+    //          <<"\n";
+    // }
+
+    foreach(QObject*s,*sl){
+
+        const QMetaObject *meta = s->metaObject();
+        int totalProperties = meta->propertyCount();
+        QString data="";
+        for(int i=1;i<totalProperties;i++){
+            QMetaProperty prop = meta->property(i);
+            QVariant propValue = prop.read(s);
+            if(propValue.typeId()==QVariant::String){
+                QString value = propValue.toString();
+                data.append(value);
+                data.append(" : ");
+            }
+            if(propValue.typeId()==QVariant::Date){
+                QString value = propValue.toDate().toString("yyyy/MM/dd");
+                data.append(value);
+                data.append(" : ");
+            }
+            if(propValue.typeId()==QVariant::Bool){
+                QString value = QVariant(propValue.toBool()).toString();
+                data.append(value);
+                data.append("\n");
+            }
+        }
+        cout<<data;
     }
 }
 

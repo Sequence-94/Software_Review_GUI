@@ -3,15 +3,17 @@
 #include"software.h"
 #include<QList>
 
+
 class SoftwareList
 {
 public:
     SoftwareList();
-    void add(Software s);
-    QList<Software> getSoftList() const;
+    ~SoftwareList();
+    void add(Software* s);
+    QList<Software*>* getSoftList() const;
 
 private:
-    QList<Software> softList;
+    QList<Software*>* softList;
 };
 
 #endif // SOFTWARELIST_H

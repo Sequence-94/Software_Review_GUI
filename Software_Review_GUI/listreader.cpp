@@ -5,19 +5,19 @@
 
 ListReader::ListReader() {}
 
-SoftwareList ListReader::read() const
+SoftwareList* ListReader::read() const
 {
     FileReader fr("sequencefile.txt");
     QString str = fr.read();
-    SoftwareList list;
+    SoftwareList* list(new SoftwareList());
     QStringList data = str.split("\n");
-    for(int i=0;i<data.size()-1;i++){
+    for(int i=1;i<data.size()-1;i++){
         QStringList line = data.at(i).split("#");
-        Software s(line.at(0),
+        Software* s(new Software(line.at(0),
                    QDate::fromString(line.at(1),"yyyy/MM/dd"),
-                   QVariant(line.at(2)).toBool()
+                                 QVariant(line.at(2)).toBool())
                    );
-        list.add(s);
+        list->add(s);
     }
     return list;
 }
