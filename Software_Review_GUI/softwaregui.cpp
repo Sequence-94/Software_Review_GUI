@@ -110,7 +110,10 @@ void SoftwareGui::displaySoftware()
                 data.append("\n");
             }
         }
-        cout<<data;
+        QMessageBox msgBox;
+        msgBox.setText(data);
+        msgBox.exec();
+        // cout<<data;
     }
 }
 
