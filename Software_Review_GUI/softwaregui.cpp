@@ -5,9 +5,12 @@
 #include<QPushButton>
 #include<QLabel>
 #include<QGridLayout>
+#include<QMessageBox>
 #include"listwriter.h"
 #include"software.h"
 #include"listreader.h"
+
+
 
 
 
@@ -22,12 +25,23 @@ SoftwareGui::SoftwareGui(QWidget *parent)
     //GUI
     softwareReviewGui();
     setWindowTitle("Software Review");
-    //setMinimumSize(350,350);
+    setMinimumSize(350,350);
 
     //signals & slots
     connect(addButton,&QPushButton::clicked,this,&SoftwareGui::addSoftware);
     connect(disButton,&QPushButton::clicked,this,&SoftwareGui::displaySoftware);
 
+    //initialize widgets
+    nameInput->setPlaceholderText("Enter Software Name Here");
+    nameInput->setToolTip("Max 50 characters");
+    nameInput->setMaxLength(50);
+
+    dateInput->setToolTip("Enter The Date Of The Review");
+
+    recoInput->setToolTip("Mark if you would recommend software otherwise leave as unmarked");
+
+    addButton->setToolTip("Add Review To Container");
+    disButton->setToolTip("Display All Reviews Currently Inside The Container");
 }
 
 void SoftwareGui::addSoftware()
@@ -37,6 +51,18 @@ void SoftwareGui::addSoftware()
     sl.add(s);
     ListWriter lw;
     lw.write(sl);
+
+    //reset widgets
+    nameInput->clear();
+    nameInput->setFocus();
+
+    dateInput->setDate(QDate(2000,01,01));
+
+    recoInput->setChecked(false);
+
+    QMessageBox msgBox;
+    msgBox.setText("The Review Has Been Added To The Container.");
+    msgBox.exec();
 
 
 }

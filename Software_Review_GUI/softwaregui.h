@@ -6,6 +6,7 @@ class QLineEdit;
 class QDateEdit;
 class QCheckBox;
 class QPushButton;
+class QMessageBox;
 
 
 class SoftwareGui : public QWidget
