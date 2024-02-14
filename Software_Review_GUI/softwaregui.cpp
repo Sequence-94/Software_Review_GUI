@@ -78,13 +78,6 @@ void SoftwareGui::displaySoftware()
 
     QTextStream cout(stdout);
     QList<Software*>* sl = list->getSoftList();
-    // foreach(QObject* s,*sl){
-    //     cout<<
-    //         s->getName()<<": "<<
-    //         s->getDate().toString("yyyy/MM/dd")<<": "<<
-    //         QVariant(s->getRecommend()).toString()
-    //          <<"\n";
-    // }
 
     foreach(QObject*s,*sl){
 
